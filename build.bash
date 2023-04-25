@@ -1,30 +1,57 @@
-# Install dependencies
-echo "Installing dependencies..."
-if [ ! -d "libs" ]; then
-    mkdir libs
+echo -e "\n---------------------------------\n"
+
+echo "Checking for required packages..."
+echo
+reqPkg=(
+    libssl-dev
+    libcurl4-openssl-dev
+)
+totalPkg=$(dpkg -l | awk '{print $2}')
+
+for pkg in ${reqPkg[@]};
+    do
+        installed=false
+        for installedPkg in ${totalPkg[@]};
+            do
+                installedPkg=$(echo $installedPkg | cut -d':' -f1)
+                if [[ $pkg == $installedPkg ]]; then
+                    echo "[=] $pkg is installed"
+                    installed=$true
+                fi
+            done
+        if [[ $installed = false ]]; then
+            echo "$pkg is not installed"
+            echo "Installing $pkg..."
+            sudo apt install $pkg
+            echo "[+] $pkg installed"
+        fi
+    done
+echo
+echo "Required packages installed"
+
+echo -e "\n---------------------------------\n"
+
+# Download dependencies
+echo "Downloading dependencies..."
+if [ ! -d "deps" ]; then
+    mkdir deps
 fi
 
-cd libs
-if [ ! -d "libs/DPP" ]; then
-    git clone https://github.com/brainboxdotcc/DPP.git
-    # if [ ! -f "dpp.deb" ]; then 
-    #     echo "Downloading D++ package..."
-    #     wget -O dpp.deb https://dl.dpp.dev/
-    #     echo "D++ package downloaded..."
-    # fi
-
-    echo "Installing D++ package..."
-    sudo dpkg -i dpp.deb
-    echo "[+] libdpp"
-    rm dpp.deb
-fi
+cd deps
 
 # https://github.com/adeharo9/cpp-dotenv.git
-if [ ! -d "libs/cpp-dotenv" ]; then
+if [ ! -d "cpp-dotenv" ]; then
     git clone "https://github.com/adeharo9/cpp-dotenv.git"
 fi
+
+if [ ! -d "sleepy-discord" ]; then
+    git clone https://github.com/yourWaifu/sleepy-discord.git
+fi
+
 cd ..
-echo "Dependencies installed..."
+echo "Dependencies downloaded..."
+
+echo -e "\n---------------------------------\n"
 
 # Create env file if not exists
 if [ ! -f ".env" ]; then
@@ -39,4 +66,17 @@ if [ ! -f ".env" ]; then
     ENV=$(echo "$ENV" | cut -d$'\n' -f2-)
     echo "$ENV" >> .env
     echo ".env file created..."
+    echo -e "\n---------------------------------\n"
 fi
+
+# Build the bot
+echo "Building the bot..."
+if [ ! -d "build" ]; then
+    mkdir build
+else 
+    sudo rm -rf build/*
+fi
+cd build
+cmake ..
+make
+echo -e "\n---------------------------------\n"

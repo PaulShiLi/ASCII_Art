@@ -1,19 +1,25 @@
-#include <iostream>
-#include <dpp/dpp.h>
-#include <string>
-// #include "dotenv.h"
+#include "sleepy_discord/sleepy_discord.h"
+#include "dotenv.h"
 
 using namespace std;
+using namespace SleepyDiscord;
+using namespace dotenv;
 
-// We'll be implementing s
-// https://huggingface.co/prithivida/parrot_paraphraser_on_T5
+class MyClientClass : public DiscordClient {
+public:
+	using DiscordClient::DiscordClient;
+	void onMessage(Message message) override {
+		if (message.startsWith("whcg hello"))
+			sendMessage(message.channelID, "Hello " + message.author.username);
+	}
+    void onReady(Ready readyData) override {
+        cout << "Logged in as " << readyData.user.username << endl;
+    }
+};
 
-
-// Get BOT_TOKEN variable from local .env file
-
-
-int main()
-{
-    printf("Hello World!\n");
-    return 0;
+int main() {
+    env.load_dotenv();
+	MyClientClass client(env["BOT_TOKEN"], USER_CONTROLED_THREADS);
+	client.setIntents(Intent::SERVER_MESSAGES);
+	client.run();
 }

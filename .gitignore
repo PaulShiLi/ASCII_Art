@@ -1,3 +1,4 @@
-libs
+deps
+build
 .env
 .vscode
