@@ -13,7 +13,13 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
     # your others files...
 )
- 
+
+target_compile_features (${PROJECT_NAME}
+  INTERFACE
+    # Enable C++17 standard compliance
+    cxx_std_17
+)
+
 # Linking libraries
 target_link_libraries(${PROJECT_NAME}
     dpp
@@ -28,6 +34,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
  
 # Set C++ version
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    CXX_STANDARD 17 # or 20 if you want something more recent
+    CXX_STANDARD 20 # or 20 if you want something more recent
     CXX_STANDARD_REQUIRED ON
 )
