@@ -1,5 +1,10 @@
 echo -e "\n---------------------------------\n"
 
+echo "Updating existing packages..."
+sudo apt update -y
+
+echo -e "\n---------------------------------\n"
+
 echo "Checking for required packages..."
 echo
 reqPkg=(
@@ -22,7 +27,7 @@ for pkg in ${reqPkg[@]};
         if [[ $installed = false ]]; then
             echo "$pkg is not installed"
             echo "Installing $pkg..."
-            sudo apt install $pkg
+            sudo apt install $pkg --fix-missing -y
             echo "[+] $pkg installed"
         fi
     done
