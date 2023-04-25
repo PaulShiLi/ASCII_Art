@@ -1,20 +1,11 @@
-if [ ! -d "pkgs" ]; then
-    mkdir pkgs
-fi
-
-cd pkgs
-
 # Description: Build OpenCV if not installed
-if [ ! -d "opencv" ]; then 
-    echo "Building OpenCV"
-    mkdir OpenCV
-    cd OpenCV
-    git clone "https://github.com/opencv/opencv.git"
-    mkdir -p build && cd build
-    cmake ../opencv
-    cmake --build . --config Release --target install
-    # sudo make -j4
-    # sudo make install
-    # g++ cv.cpp -o cv -I/usr/include/opencv4
-    # Header files are installed in /usr/local/include/opencv4
+if [ ! -f "dpp.deb" ]; then 
+    echo "Downloading D++..."
+    wget -O dpp.deb https://dl.dpp.dev/
+    echo "D++ Downloaded"
 fi
+
+echo "Installing D++..."
+sudo dpkg -i dpp.deb
+echo "[+] libdpp"
+rm dpp.deb
