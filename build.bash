@@ -1,25 +1,30 @@
-if [ ! -f "dpp.deb" ]; then 
-    echo "Downloading D++ package..."
-    wget -O dpp.deb https://dl.dpp.dev/
-    echo "D++ package downloaded..."
-fi
-
-echo "Installing D++ package..."
-sudo dpkg -i dpp.deb
-echo "[+] libdpp"
-rm dpp.deb
-
-echo "Installing D++ dependencies..."
+# Install dependencies
+echo "Installing dependencies..."
 if [ ! -d "libs" ]; then
     mkdir libs
 fi
 
+cd libs
 if [ ! -d "libs/DPP" ]; then
-    cd libs
     git clone https://github.com/brainboxdotcc/DPP.git
-    cd ..
+    # if [ ! -f "dpp.deb" ]; then 
+    #     echo "Downloading D++ package..."
+    #     wget -O dpp.deb https://dl.dpp.dev/
+    #     echo "D++ package downloaded..."
+    # fi
+
+    echo "Installing D++ package..."
+    sudo dpkg -i dpp.deb
+    echo "[+] libdpp"
+    rm dpp.deb
 fi
-echo "D++ dependencies installed..."
+
+# https://github.com/adeharo9/cpp-dotenv.git
+if [ ! -d "libs/cpp-dotenv" ]; then
+    git clone "https://github.com/adeharo9/cpp-dotenv.git"
+fi
+cd ..
+echo "Dependencies installed..."
 
 # Create env file if not exists
 if [ ! -f ".env" ]; then
