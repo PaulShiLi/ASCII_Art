@@ -65,6 +65,7 @@ if [ ! -f ".env" ]; then
     ENV='
     BOT_TOKEN=""
     BOT_PREFIX="!"
+    LOG_CHANNEL_ID=""
     '
     # Dedent the string
     ENV=$(echo "$ENV" | sed -e 's/^[[:space:]]*//')
