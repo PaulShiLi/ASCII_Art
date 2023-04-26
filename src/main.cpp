@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "sleepy_discord/sleepy_discord.h"
 #include "dotenv.h"
 
@@ -11,6 +12,13 @@ public:
 	Ready bot;
 	void onMessage(Message message) override {
 		cout << message.author.username << ": " << message.content << endl;
+		// Iterate through message.mentions
+		for ( auto mention : message.mentions ) {
+			// If bot is mentioned, send message
+			if ( mention == bot.user ) {
+				sendMessage(message.channelID, "You mentioned me!");
+			}
+		}
 		if (message.startsWith("Hello"))
 			sendMessage(message.channelID, "Hello " + message.author.username);
 	}
