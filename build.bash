@@ -54,6 +54,10 @@ if [ ! -d "DPP" ]; then
     git clone https://github.com/brainboxdotcc/DPP.git
 fi
 
+if [ ! -d "curlpp" ]; then
+    git clone https://github.com/jpbarrette/curlpp.git
+fi
+
 cd ..
 echo "Dependencies downloaded..."
 
@@ -68,6 +72,7 @@ if [ ! -f ".env" ]; then
     BOT_PREFIX="!"
     LOG_CHANNEL_ID=""
     HUGGINGFACE_API_KEY=""
+    HUGGINGFACE_API_URL="https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-common_gen"
     '
     # Dedent the string
     ENV=$(echo "$ENV" | sed -e 's/^[[:space:]]*//')

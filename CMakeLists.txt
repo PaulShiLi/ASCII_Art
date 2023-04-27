@@ -8,16 +8,15 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
 )
  
-# add_subdirectory(deps/sleepy-discord)
 add_subdirectory(deps/cpp-dotenv)
 add_subdirectory(deps/DPP)
-
+add_subdirectory(deps/curlpp)
 
 
 target_link_libraries(${PROJECT_NAME} 
-    # sleepy-discord
     cpp_dotenv
     dpp
+    curlpp
 )
 
 # Specify includes
