@@ -10,6 +10,7 @@ echo
 reqPkg=(
     libssl-dev
     libcurl4-openssl-dev
+    build-essential
 )
 totalPkg=$(dpkg -l | awk '{print $2}')
 
@@ -47,10 +48,6 @@ cd deps
 # https://github.com/adeharo9/cpp-dotenv.git
 if [ ! -d "cpp-dotenv" ]; then
     git clone "https://github.com/adeharo9/cpp-dotenv.git"
-fi
-
-if [ ! -d "sleepy-discord" ]; then
-    git clone https://github.com/yourWaifu/sleepy-discord.git
 fi
 
 if [ ! -d "DPP" ]; then
