@@ -53,6 +53,10 @@ if [ ! -d "sleepy-discord" ]; then
     git clone https://github.com/yourWaifu/sleepy-discord.git
 fi
 
+if [ ! -d "DPP" ]; then
+    git clone https://github.com/brainboxdotcc/DPP.git
+fi
+
 cd ..
 echo "Dependencies downloaded..."
 
@@ -66,6 +70,7 @@ if [ ! -f ".env" ]; then
     BOT_TOKEN=""
     BOT_PREFIX="!"
     LOG_CHANNEL_ID=""
+    HUGGINGFACE_API_KEY=""
     '
     # Dedent the string
     ENV=$(echo "$ENV" | sed -e 's/^[[:space:]]*//')
