@@ -8,13 +8,22 @@ add_executable(${PROJECT_NAME}
     src/main.cpp
 )
  
-add_subdirectory(deps/sleepy-discord)
+# add_subdirectory(deps/sleepy-discord)
 add_subdirectory(deps/cpp-dotenv)
+add_subdirectory(deps/DPP)
+
 
 
 target_link_libraries(${PROJECT_NAME} 
-    sleepy-discord
+    # sleepy-discord
     cpp_dotenv
+    dpp
+)
+
+# Specify includes
+target_include_directories(${PROJECT_NAME} PRIVATE
+    deps/DPP/include
+    # Remember to add the include directories of any other libraries too
 )
 
 # Set C++ version
