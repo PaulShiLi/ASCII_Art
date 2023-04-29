@@ -11,6 +11,9 @@ reqPkg=(
     libssl-dev
     libcurl4-openssl-dev
     build-essential
+    libcurl4-openssl-dev
+    curl
+    openssl
 )
 totalPkg=$(dpkg -l | awk '{print $2}')
 
@@ -54,8 +57,14 @@ if [ ! -d "DPP" ]; then
     git clone https://github.com/brainboxdotcc/DPP.git
 fi
 
-if [ ! -d "curlpp" ]; then
-    git clone https://github.com/jpbarrette/curlpp.git
+if [ ! -f "../scripts/openai.hpp" ]; then
+    git clone https://github.com/olrea/openai-cpp.git
+    cp openai-cpp/include/openai/ ../scripts -r
+    sudo rm -rf openai-cpp
+fi
+
+if [ ! -d "json" ]; then
+    git clone https://github.com/nlohmann/json.git
 fi
 
 cd ..
@@ -71,8 +80,8 @@ if [ ! -f ".env" ]; then
     BOT_TOKEN=""
     BOT_PREFIX="!"
     LOG_CHANNEL_ID=""
-    HUGGINGFACE_API_KEY=""
-    HUGGINGFACE_API_URL="https://api-inference.huggingface.co/models/mrm8488/t5-base-finetuned-common_gen"
+    OPENAI_KEY=""
+    MODEL="text-davinci-003"
     '
     # Dedent the string
     ENV=$(echo "$ENV" | sed -e 's/^[[:space:]]*//')
@@ -86,8 +95,6 @@ fi
 echo "Building the bot..."
 if [ ! -d "build" ]; then
     mkdir build
-else 
-    sudo rm -rf build/*
 fi
 cd build
 cmake ..

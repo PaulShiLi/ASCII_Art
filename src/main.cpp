@@ -30,8 +30,15 @@ int main() {
 				// Remove discord mention from message by finding first occurence of <@ and deleting all the way until first occurence of >
 				string message = event.msg.content;
 				message.erase(message.find("<@"), message.find(">") - message.find("<@") + 1);
+
+				// Create flan object
+				Flan flan;
+
+				// Get answer from flan
+				string answer = flan.getAnswer(message);
+
 				// Send message to channel
-				event.reply("Hello " + event.msg.author.username + ", you said: " + message);
+				event.reply(answer);
 			} 
 			
 		}

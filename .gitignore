@@ -2,3 +2,5 @@ deps
 build
 .env
 .vscode
+openai.hpp
+test.py
