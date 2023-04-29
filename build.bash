@@ -57,7 +57,7 @@ if [ ! -d "DPP" ]; then
     git clone https://github.com/brainboxdotcc/DPP.git
 fi
 
-if [ ! -f "../scripts/openai.hpp" ]; then
+if [ ! -d "../scripts/openai" ]; then
     git clone https://github.com/olrea/openai-cpp.git
     cp openai-cpp/include/openai/ ../scripts -r
     sudo rm -rf openai-cpp

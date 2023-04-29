@@ -23,6 +23,9 @@ public:
         },
         {
             "prompt", ""
+        },
+        {
+            "max_tokens", 300
         }
     };
     Flan() {
@@ -39,6 +42,7 @@ public:
         try {
             payload["prompt"] = prompt;
             response = openai::completion().create(payload);
+            // cout << response.dump(4) << endl;
             return response["choices"][0]["text"];
         }
         catch (nlohmann::detail::type_error) {
