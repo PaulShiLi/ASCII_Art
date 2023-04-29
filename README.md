@@ -4,7 +4,7 @@
 
 ## 🎯 MVP (Minimal Viable Product)
 
-The MVP of this project is to create a Discord bot that provides users an interactive assistant-like bot using OpenAI’s GPT 3 Davinci model along with commands that implements the usage of previously learned functions and knowledge of C++. It is similar to Bing AI / ChatGPT but implemented in Discord.
+The MVP of this project is to create a Discord bot that provides users an interactive assistant-like bot using OpenAI’s GPT 3 Davinci model along with commands that implements the usage of previously learned functions and knowledge of C++. It is similar to Bing AI / ChatGPT but implemented in Discord. In addition, it has a wordle game built into it when calling **!wordle**.
 
 ---
 
@@ -82,5 +82,6 @@ This project does use 3rd party libraries to help simplify and improve the codeb
 - [D++](https://github.com/brainboxdotcc/DPP) - A C++ wrapper for Discord API
 - [OpenAI C++](https://github.com/olrea/openai-cpp) - A C++ wrapper for OpenAI API
 - [Json](https://github.com/nlohmann/json) - A C++ library that introduces dict types and parses json/dictionary.
+- [CPR](https://github.com/libcpr/cpr) - A C++ library that is a wrapper for cURL to enable HTTP requests.
 
 ---
