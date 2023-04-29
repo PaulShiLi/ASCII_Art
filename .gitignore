@@ -4,3 +4,4 @@ build
 .vscode
 openai.hpp
 test.py
+scripts/openai
