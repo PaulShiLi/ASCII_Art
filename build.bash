@@ -8,11 +8,11 @@ echo -e "\n---------------------------------\n"
 echo "Checking for required packages..."
 echo
 reqPkg=(
-    libssl-dev
-    libcurl4-openssl-dev
     build-essential
-    curl
+    libssl-dev
     openssl
+    curl
+    libcurl4-openssl-dev
 )
 totalPkg=$(dpkg -l | awk '{print $2}')
 
