@@ -11,7 +11,6 @@ reqPkg=(
     libssl-dev
     libcurl4-openssl-dev
     build-essential
-    libcurl4-openssl-dev
     curl
     openssl
 )
