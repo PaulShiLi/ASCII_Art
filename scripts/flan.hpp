@@ -3,7 +3,6 @@
 #include <string>
 #include "dotenv.h"
 #include <vector>
-#include <dpp/dpp.h>
 #include <nlohmann/json.hpp>
 #include "openai/openai.hpp"
 

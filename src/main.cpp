@@ -2,6 +2,7 @@
 #include "dotenv.h"
 #include <dpp/dpp.h>
 #include "../scripts/flan.hpp"
+#include "../scripts/wordle.hpp"
 
 using namespace std;
 using namespace dotenv;
@@ -23,6 +24,21 @@ int main() {
 	// On message event
 	bot.on_message_create([&bot](const message_create_t& event) {
 		cout << event.msg.author.username << ": " << event.msg.content << endl;
+
+		if (event.msg.author.id != bot.me.id) {
+			if (event.msg.content == "!wordle") {
+				Wordle wordle;
+				wordle.initWordle(bot, event.msg);
+			}
+			
+			channel chan = bot.channel_get_sync(event.msg.channel_id);
+			string wordleSearch = "wordle-";
+			if (chan.name.substr(0, wordleSearch.size()) == wordleSearch) {
+				Wordle wordle;
+				wordle.validate(bot, event);
+			}
+		}
+
 		// If mention bot
 		for (auto mention : event.msg.mentions) {
 			// Check if user part of mention == bot

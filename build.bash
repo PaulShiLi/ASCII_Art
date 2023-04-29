@@ -47,13 +47,16 @@ fi
 
 cd deps
 
-# https://github.com/adeharo9/cpp-dotenv.git
 if [ ! -d "cpp-dotenv" ]; then
     git clone "https://github.com/adeharo9/cpp-dotenv.git"
 fi
 
 if [ ! -d "DPP" ]; then
     git clone https://github.com/brainboxdotcc/DPP.git
+fi
+
+if [ ! -d "cpr" ]; then
+    git clone https://github.com/libcpr/cpr.git
 fi
 
 if [ ! -d "../scripts/openai" ]; then
@@ -81,12 +84,23 @@ if [ ! -f ".env" ]; then
     LOG_CHANNEL_ID=""
     OPENAI_KEY=""
     MODEL="text-davinci-003"
+    RANDOM_WORD_API="https://random-word-api.herokuapp.com/word"
     '
     # Dedent the string
     ENV=$(echo "$ENV" | sed -e 's/^[[:space:]]*//')
     ENV=$(echo "$ENV" | cut -d$'\n' -f2-)
     echo "$ENV" >> .env
     echo ".env file created..."
+    echo -e "\n---------------------------------\n"
+fi
+
+# Create wordle json file if not exists
+if [ ! -f "wordle.json" ]; then
+    echo "Creating wordle.json file..."
+    touch wordle.json
+    WORDLE='{}'
+    echo "$WORDLE" >> wordle.json
+    echo "wordle.json file created..."
     echo -e "\n---------------------------------\n"
 fi
 

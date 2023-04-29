@@ -14,11 +14,13 @@ add_executable(${PROJECT_NAME}
 add_subdirectory(deps/cpp-dotenv)
 add_subdirectory(deps/DPP)
 add_subdirectory(deps/json)
+add_subdirectory(deps/cpr)
 
 target_link_libraries(${PROJECT_NAME} 
     cpp_dotenv
     dpp
     nlohmann_json
+    cpr
     ${CURL_LIBRARIES}
 )
 
