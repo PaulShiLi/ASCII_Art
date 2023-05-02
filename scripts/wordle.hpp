@@ -182,10 +182,7 @@ class Wordle {
         // Convert event.msg.content to lowercase
         transform(guess.begin(), guess.end(), guess.begin(), ::tolower);
 
-        cout << "Word: " << word << " | Guess: " << guess << endl;
-
         if (wordleData[to_string(channelId)]["guesses"].size() == MAX_TRIES && valid == true) {
-            cout << "No more guesses available" << endl;
             valid = false;
             embedGuess.set_title("No more guesses available!")
                 .set_description("You have run out of guesses. The word was `" + word + "`.")
@@ -203,7 +200,6 @@ class Wordle {
         }
 
         if (guess != word && valid == true){
-            cout << "Guess: " << guess << endl;
             response = comCheck(word, guess);
             wordleData[to_string(channelId)]["guesses"].push_back(guess);
             embedGuess.set_title("Your Guess: " + guess)
@@ -211,7 +207,6 @@ class Wordle {
                 .set_color(colors::orange);
         }
         if (guess == word && valid == true){
-            cout << "Word guessed!" << endl;
             response = "You guessed the word! The word was `" + word + "`.\n" + "It took you " + to_string(wordleData[to_string(channelId)]["guesses"].size()) + " guesses!\nType any message to delete this channel or generate a new channel with the command `!wordle`.";
             embedGuess.set_title("You Win!")
                 .set_description(response)
@@ -229,7 +224,6 @@ class Wordle {
             cout << "Unable to open wordle.json" << endl;
         }
 
-        cout << "Valid: " << valid << endl;
         event.reply(message(channelId, embedGuess));
     }
 
