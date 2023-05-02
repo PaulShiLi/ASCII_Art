@@ -48,7 +48,7 @@ fi
 cd deps
 
 if [ ! -d "cpp-dotenv" ]; then
-    git clone "https://github.com/adeharo9/cpp-dotenv.git"
+    git clone https://github.com/adeharo9/cpp-dotenv.git
 fi
 
 if [ ! -d "DPP" ]; then
