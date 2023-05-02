@@ -14,6 +14,7 @@ reqPkg=(
     curl
     libcurl4-openssl-dev
     cmake
+    zlib1g
 )
 totalPkg=$(dpkg -l | awk '{print $2}')
 
