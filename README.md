@@ -1,4 +1,4 @@
-# C++ CSH CH 10 Project
+# Wordle Discord Bot
 
 ---
 
